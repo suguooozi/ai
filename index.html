@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 似顏繪訂購表單 - DrawHeart 繪心室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f3dee8 100%); /*網頁背景*/
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #f3e0e9 0%, #a78ec0 100%); /*中間背景*/
+            padding: 40px 30px;
+            text-align: center;
+            color: #846e9b ;
+        }
+
+        .form-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .form-header p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .contact-info, .price-info, .process-info {
+            background: rgba(255,255,255,0.2);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info h3, .price-info h3, .process-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .pricing ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pricing li {
+            background-color: rgba(255,255,255,0.2);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-content {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"], 
+        input[type="email"], 
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #080808;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input[type="text"]:focus, 
+        input[type="email"]:focus, 
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover, .checkbox-option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .radio-option input, .checkbox-option input {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        .radio-option.selected, .checkbox-option.selected {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #846e9b);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .form-header {
+                padding: 30px 20px;
+            }
+            
+            .form-header h1 {
+                font-size: 2em;
+                font:white ;
+            }
+            
+            .form-content {
+                padding: 30px 20px;
+            }
+        
+            .pricing li {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>🎨 DrawHeart繪心室|似顏繪訂購表單</h1>
+    <form id="mG61Hd"
+    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsxlbOJKdxfd9I0KSUM9MQ2t3qUAnGaGm_6QXISMVFo1gWsQ/formResponse" target="_self" method="POST">
+            <p>歡迎來到 DrawHeart 繪心室的似顏繪訂購表單</p>
+            <p>本服務為純手繪插畫風格，專屬客製，歡迎附上清晰照片與需求細節〜</p>
+            
+            <div class="contact-info">
+                <h3>📱 聯絡我們</h3>
+                <p>IG:@drawheart_510</p>
+                <p>Email:drawheart510@google.com</p>
+            </div>
+            
+            <div class="price-info pricing">
+                <h3>💰 價格方案</h3>
+                <ul>
+                    <li><span>單人似顏繪</span><span>NT$500</span></li>
+                    <li><span>雙人情侶似顏繪</span><span>NT$900</span></li>
+                    <li><span>寵物</span><span>NT$350</span></li>
+                    <li><span>每增加1人</span><span>NT$+250</span></li>
+                    <li><span>插畫背景</span><span>NT$+200</span></li>
+                    <li><span>急件</span><span>NT$+150</span></li>
+                </ul>
+            </div>
+            
+            <div class="process-info">
+                <h3>✍ 流程</h3>
+                <p>填表→ 報價確認→ 付訂金→ 草圖 → 完稿 → 交付電子檔（約7〜14天）</p>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <div id="portraitForm">
+                <div class="form-group">
+                    <label for="name">姓名 <span class="required">*</span></label>
+                    <input type="text" id="name" name="entry.69310158" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">聯絡 Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="entry.1048946484" required>
+                </div>
+
+                <div class="form-group">
+                    <label>你想要的似顏繪人數？ <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1808762848" value="1人" required>
+                            <span>1人</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1808762848" value="2人" required>
+                            <span>2人</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1808762848" value="3人" required>
+                            <span>3人</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1808762848" value="4人" required>
+                            <span>4人</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1808762848" value="5人以上" required>
+                            <span>5人以上（請在備註中說明）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>是否需要加入寵物？ <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1351740863" value="不需要" required>
+                            <span>不需要</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1351740863" value="需要（一隻）" required>
+                            <span>需要（一隻）</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1351740863" value="需要（兩隻以上）" required>
+                            <span>需要（兩隻以上，請在備註中說明）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>背景風格偏好（可複選）</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="entry.148619828" value="素色背景">
+                            <span>素色背景</span>
+                        </div>
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="entry.148619828" value="插畫風格背景">
+                            <span>插畫風格背景</span>
+                        </div>
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="entry.148619828" value="透明背景（PNG）">
+                            <span>透明背景（PNG）</span>
+                        </div>
+                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                            <input type="checkbox" name="entry.148619828" value="其他">
+                            <span>其他（請備註）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>畫風選擇</label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1465948376" value="Q版">
+                            <span>Q版</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1465948376" value="手繪風">
+                            <span>手繪風</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1465948376" value="簡筆風">
+                            <span>簡筆風</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1465948376" value="寫實風">
+                            <span>寫實風</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.1465948376" value="其他">
+                            <span>其他（請備註）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>希望完成時間</label>
+                    <div class="radio-group">
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.694258435" value="越快越好">
+                            <span>越快越好（加急需另收費）</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.694258435" value="7天內">
+                            <span>7 天內</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.694258435" value="14天內">
+                            <span>14 天內</span>
+                        </div>
+                        <div class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" name="entry.694258435" value="不急">
+                            <span>不急，請照排單製作</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">其他備註或需求說明（服裝、動作、文字等）</label>
+                    <textarea id="notes" name="entry.1112005445" placeholder="請詳細描述您的需求，包括服裝風格、人物動作、背景要求、特殊文字等..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">提交訂單</button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <script>
+        function selectRadio(element) {
+            const radio = element.querySelector('input[type="radio"]');
+            const groupName = radio.name;
+            
+            // 清除同組其他選項的選中狀態
+            document.querySelectorAll(`input[name="${groupName}"]`).forEach(input => {
+                input.closest('.radio-option').classList.remove('selected');
+            });
+            
+            // 選中當前選項
+            radio.checked = true;
+            element.classList.add('selected');
+        }
+
+        function toggleCheckbox(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                element.classList.add('selected');
+            } else {
+                element.classList.remove('selected');
+            }
+        }
+
+        document.getElementById('portraitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 收集表單數據
+            const formData = new FormData(this);
+            const data = {};
+            
+            // 處理單選項目
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // 這裡可以處理表單提交邏輯
+            alert('表單提交成功！我們會盡快與您聯絡。');
+            console.log('表單數據:', data);
+        });
+
+        // 頁面載入時的動畫效果
+        window.addEventListener('load', function() {
+            document.querySelector('.form-container').style.opacity = '0';
+            document.querySelector('.form-container').style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                document.querySelector('.form-container').style.transition = 'all 0.6s ease';
+                document.querySelector('.form-container').style.opacity = '1';
+                document.querySelector('.form-container').style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
