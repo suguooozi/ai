@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DrawHeart 繪心室 - 純手繪似顏繪客製訂購，歡迎填寫表單預約。">
     <title>🎨 似顏繪訂購表單 - DrawHeart 繪心室</title>
     <style>
         * {
@@ -11,9 +12,17 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --purple: #846e9b;          /* 主色 */
+            --purple-dark: #5a4a6e;     /* 深紫（文字） */
+            --purple-light: #a78ec0;    /* 淺紫 */
+            --pink-light: #f3dee8;      /* 淺粉 */
+            --bg-soft: #f8f9fa;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f3dee8 100%); /*網頁背景*/
+            font-family: 'Segoe UI', 'Microsoft JhengHei', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, var(--pink-light) 100%); /*網頁背景*/
             min-height: 100vh;
             padding: 20px;
         }
@@ -28,26 +37,25 @@
         }
 
         .form-header {
-            background: linear-gradient(135deg, #f3e0e9 0%, #a78ec0 100%); /*中間背景*/
+            background: linear-gradient(135deg, #f3e0e9 0%, var(--purple-light) 100%); /*中間背景*/
             padding: 40px 30px;
             text-align: center;
-            color: #846e9b ;
+            color: var(--purple-dark);
         }
 
         .form-header h1 {
-            font-size: 2.5em;
+            font-size: 2.2em;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.4);
         }
 
         .form-header p {
             font-size: 1.1em;
             line-height: 1.6;
-            opacity: 0.95;
         }
 
         .contact-info, .price-info, .process-info {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.35);
             margin: 20px 0;
             padding: 20px;
             border-radius: 15px;
@@ -55,8 +63,27 @@
         }
 
         .contact-info h3, .price-info h3, .process-info h3 {
-            margin-bottom: 10px;
-            font-size: 1.5em;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .social-links img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .social-links a:hover img {
+            transform: scale(1.15);
         }
 
         .pricing ul {
@@ -65,10 +92,10 @@
         }
 
         .pricing li {
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255,255,255,0.4);
             padding: 1rem;
             margin: 0.5rem 0;
-            border-radius: 5px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -90,29 +117,37 @@
             font-size: 1.1em;
         }
 
+        .form-group .hint {
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #777;
+            margin-top: -6px;
+            margin-bottom: 10px;
+        }
+
         .required {
             color: #e74c3c;
         }
 
-        input[type="text"], 
-        input[type="email"], 
+        input[type="text"],
+        input[type="email"],
         textarea {
             width: 100%;
             padding: 15px;
-            border: 2px solid #080808;
+            border: 2px solid #d8cfe3;
             border-radius: 10px;
             font-size: 16px;
             transition: all 0.3s ease;
-            background: #f8f9fa;
+            background: var(--bg-soft);
         }
 
-        input[type="text"]:focus, 
-        input[type="email"]:focus, 
+        input[type="text"]:focus,
+        input[type="email"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--purple);
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(132, 110, 155, 0.15);
         }
 
         .radio-group, .checkbox-group {
@@ -125,7 +160,7 @@
             display: flex;
             align-items: center;
             padding: 15px;
-            background: #f8f9fa;
+            background: var(--bg-soft);
             border-radius: 10px;
             border: 2px solid transparent;
             cursor: pointer;
@@ -133,18 +168,20 @@
         }
 
         .radio-option:hover, .checkbox-option:hover {
-            background: #e9ecef;
-            border-color: #667eea;
+            background: #efe9f5;
+            border-color: var(--purple-light);
         }
 
         .radio-option input, .checkbox-option input {
             margin-right: 12px;
             transform: scale(1.2);
+            accent-color: var(--purple);
         }
 
-        .radio-option.selected, .checkbox-option.selected {
-            background: rgba(102, 126, 234, 0.1);
-            border-color: #667eea;
+        .radio-option:has(input:checked),
+        .checkbox-option:has(input:checked) {
+            background: rgba(132, 110, 155, 0.12);
+            border-color: var(--purple);
         }
 
         textarea {
@@ -152,10 +189,74 @@
             resize: vertical;
         }
 
+        /* ===== 圖片上傳區 ===== */
+        .upload-area {
+            border: 2px dashed var(--purple-light);
+            border-radius: 12px;
+            background: var(--bg-soft);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            background: #efe9f5;
+            border-color: var(--purple);
+        }
+
+        .upload-area .upload-icon {
+            font-size: 2.2em;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .upload-previews {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #d8cfe3;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 22px;
+            height: 22px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 14px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .preview-item .remove-btn:hover {
+            background: #e74c3c;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #846e9b);
+            background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple) 100%);
             color: white;
             border: none;
             border-radius: 15px;
@@ -163,41 +264,70 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px rgba(132, 110, 155, 0.35);
         }
 
         .submit-btn:active {
             transform: translateY(0);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* 提交結果訊息 */
+        .form-message {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 1.05em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .form-message.success {
+            display: block;
+            background: #e8f6ee;
+            color: #1e7e4c;
+            border: 2px solid #7fd4a5;
+        }
+
+        .form-message.error {
+            display: block;
+            background: #fdeeee;
+            color: #c0392b;
+            border: 2px solid #f0a5a5;
+        }
+
         @media (max-width: 768px) {
             .form-container {
-                margin: 10px;
+                margin: 10px auto;
                 border-radius: 15px;
             }
-            
+
             .form-header {
                 padding: 30px 20px;
             }
-            
+
             .form-header h1 {
-                font-size: 2em;
-                font:white ;
+                font-size: 1.7em;
             }
-            
+
             .form-content {
                 padding: 30px 20px;
             }
-        
+
             .pricing li {
                 flex-direction: column;
                 text-align: center;
+                gap: 4px;
             }
         }
     </style>
@@ -206,24 +336,20 @@
     <div class="form-container">
         <div class="form-header">
             <h1>🎨 DrawHeart繪心室 | 似顏繪訂購表單</h1>
-    <form id="mG61Hd"
-    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsxlbOJKdxfd9I0KSUM9MQ2t3qUAnGaGm_6QXISMVFo1gWsQ/formResponse" target="_self" method="POST">
             <p>歡迎來到 DrawHeart 繪心室的似顏繪訂購表單</p>
             <p>本服務為純手繪插畫風格，專屬客製，歡迎附上清晰照片與需求細節〜</p>
-            
+
             <div class="contact-info">
                 <h3>📱 聯絡我們</h3>
-                <a href="??"><img src="fb.png" alt="facebook" title="DrawHeart 粉絲專頁"></a>
-
-                <a href="https://www.instagram.com/drawheart_510/#"><img src="ig.png" alt="instagram" title="DrawHeart 繪心室"></a>
-
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=drawheart510@google.com&su=我要訂購似顏繪&body=您好，我想訂購似顏繪服務，以下是我的需求..." target="_blank" title="寄信給我"><img src="gmail.png" alt="gmail" title="寄信給我"></a>
-
-                <a href="https://www.youtube.com/@_suguooozi"><img src="yt.png" alt="youtube" title="菓子魔法小舖"></a>
-                
-                
+                <div class="social-links">
+                    <!-- TODO: 填入 Facebook 粉絲專頁網址 -->
+                    <a href="#" title="DrawHeart 粉絲專頁"><img src="fb.png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/drawheart_510/#" title="DrawHeart 繪心室"><img src="ig.png" alt="Instagram"></a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=drawheart510@gmail.com&su=我要訂購似顏繪&body=您好，我想訂購似顏繪服務，以下是我的需求..." target="_blank" rel="noopener" title="寄信給我"><img src="gmail.png" alt="Gmail"></a>
+                    <a href="https://www.youtube.com/@_suguooozi" title="菓子魔法小舖"><img src="yt.png" alt="YouTube"></a>
+                </div>
             </div>
-            
+
             <div class="price-info pricing">
                 <h3>💰 價格方案</h3>
                 <ul>
@@ -235,7 +361,7 @@
                     <li><span>急件</span><span>NT$+150</span></li>
                 </ul>
             </div>
-            
+
             <div class="process-info">
                 <h3>✍ 流程</h3>
                 <p>填表→ 報價確認→ 付訂金→ 草圖 → 完稿 → 交付電子檔（約7〜14天）</p>
@@ -243,7 +369,7 @@
         </div>
 
         <div class="form-content">
-            <div id="portraitForm">
+            <form id="portraitForm" novalidate>
                 <div class="form-group">
                     <label for="name">姓名 <span class="required">*</span></label>
                     <input type="text" id="name" name="entry.69310158" required>
@@ -257,115 +383,126 @@
                 <div class="form-group">
                     <label>你想要的似顏繪人數？ <span class="required">*</span></label>
                     <div class="radio-group">
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        <label class="radio-option">
                             <input type="radio" name="entry.1808762848" value="1人" required>
                             <span>1人</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="entry.1808762848" value="2人" required>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="entry.1808762848" value="2人">
                             <span>2人</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="entry.1808762848" value="3人" required>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="entry.1808762848" value="3人">
                             <span>3人</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="entry.1808762848" value="4人" required>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="entry.1808762848" value="4人">
                             <span>4人</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="entry.1808762848" value="5人以上" required>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="entry.1808762848" value="5人以上">
                             <span>5人以上(請在備註中說明)</span>
-                        </div>
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>是否需要加入寵物？ <span class="required">*</span></label>
                     <div class="radio-group">
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        <label class="radio-option">
                             <input type="radio" name="entry.1351740863" value="不需要" required>
                             <span>不需要</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="entry.1351740863" value="需要（一隻）" required>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="entry.1351740863" value="需要（一隻）">
                             <span>需要（一隻）</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
-                            <input type="radio" name="entry.1351740863" value="需要（兩隻以上）" required>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="entry.1351740863" value="需要（兩隻以上）">
                             <span>需要（兩隻以上，請在備註中說明）</span>
-                        </div>
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>背景風格偏好（可複選）</label>
                     <div class="checkbox-group">
-                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                        <label class="checkbox-option">
                             <input type="checkbox" name="entry.148619828" value="素色背景">
                             <span>素色背景</span>
-                        </div>
-                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-option">
                             <input type="checkbox" name="entry.148619828" value="插畫風格背景">
                             <span>插畫風格背景</span>
-                        </div>
-                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-option">
                             <input type="checkbox" name="entry.148619828" value="透明背景（PNG）">
                             <span>透明背景（PNG）</span>
-                        </div>
-                        <div class="checkbox-option" onclick="toggleCheckbox(this)">
+                        </label>
+                        <label class="checkbox-option">
                             <input type="checkbox" name="entry.148619828" value="其他">
                             <span>其他（請備註）</span>
-                        </div>
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>畫風選擇</label>
                     <div class="radio-group">
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        <label class="radio-option">
                             <input type="radio" name="entry.1465948376" value="Q版">
                             <span>Q版</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.1465948376" value="手繪風">
                             <span>手繪風</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.1465948376" value="簡筆風">
                             <span>簡筆風</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.1465948376" value="寫實風">
                             <span>寫實風</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.1465948376" value="其他">
                             <span>其他（請備註）</span>
-                        </div>
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>希望完成時間</label>
                     <div class="radio-group">
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        <label class="radio-option">
                             <input type="radio" name="entry.694258435" value="越快越好">
                             <span>越快越好（加急需另收費）</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.694258435" value="7天內">
                             <span>7 天內</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.694258435" value="14天內">
                             <span>14 天內</span>
-                        </div>
-                        <div class="radio-option" onclick="selectRadio(this)">
+                        </label>
+                        <label class="radio-option">
                             <input type="radio" name="entry.694258435" value="不急">
                             <span>不急，請照排單製作</span>
-                        </div>
+                        </label>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="photoInput">上傳參考照片（最多 5 張，每張 5MB 以內）</label>
+                    <p class="hint">請提供清晰的正面照片，方便繪師掌握人物特徵〜</p>
+                    <div class="upload-area" id="uploadArea">
+                        <span class="upload-icon">📷</span>
+                        <span>點擊選擇圖片，或將圖片拖曳到這裡</span>
+                        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+                    </div>
+                    <div class="upload-previews" id="uploadPreviews"></div>
                 </div>
 
                 <div class="form-group">
@@ -373,72 +510,193 @@
                     <textarea id="notes" name="entry.1112005445" placeholder="請詳細描述您的需求，包括服裝風格、人物動作、背景要求、特殊文字等..."></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">提交訂單</button>
-            </div>
+                <button type="submit" class="submit-btn" id="submitBtn">提交訂單</button>
+                <div class="form-message" id="formMessage" role="alert"></div>
+            </form>
         </div>
-        </form>
     </div>
 
     <script>
-        function selectRadio(element) {
-            const radio = element.querySelector('input[type="radio"]');
-            const groupName = radio.name;
-            
-            // 清除同組其他選項的選中狀態
-            document.querySelectorAll(`input[name="${groupName}"]`).forEach(input => {
-                input.closest('.radio-option').classList.remove('selected');
-            });
-            
-            // 選中當前選項
-            radio.checked = true;
-            element.classList.add('selected');
-        }
+        // ===== 設定區 =====
+        // Google 表單的提交網址（formResponse 結尾）
+        const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsxlbOJKdxfd9I0KSUM9MQ2t3qUAnGaGm_6QXISMVFo1gWsQ/formResponse';
+        // 備註欄的 entry ID（圖片連結會自動附加在這一欄送出）
+        const NOTES_ENTRY_ID = 'entry.1112005445';
+        // 圖片上傳的 Google Apps Script 網址（設定方式見 README.md）
+        // 尚未設定時留空字串，上傳區仍可預覽，但送出時會提醒使用者改用 Email 附圖
+        const UPLOAD_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMJaJ491_NJsk-DujwtdYsVxA77keG4ttrCXeNPDNR-Xk8aJOp4MGPFe2rG4fT679X0Q/exec';
 
-        function toggleCheckbox(element) {
-            const checkbox = element.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            
-            if (checkbox.checked) {
-                element.classList.add('selected');
-            } else {
-                element.classList.remove('selected');
-            }
-        }
+        const MAX_FILES = 5;
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-        document.getElementById('portraitForm').addEventListener('submit', function(e) {
+        // ===== 圖片上傳區 =====
+        const uploadArea = document.getElementById('uploadArea');
+        const photoInput = document.getElementById('photoInput');
+        const previewsEl = document.getElementById('uploadPreviews');
+        let selectedFiles = [];
+
+        uploadArea.addEventListener('click', () => photoInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            
-            // 收集表單數據
-            const formData = new FormData(this);
-            const data = {};
-            
-            // 處理單選項目
-            for (let [key, value] of formData.entries()) {
-                if (data[key]) {
-                    if (Array.isArray(data[key])) {
-                        data[key].push(value);
-                    } else {
-                        data[key] = [data[key], value];
-                    }
-                } else {
-                    data[key] = value;
-                }
-            }
-            
-            // 這裡可以處理表單提交邏輯
-            alert('表單提交成功！我們會盡快與您聯絡。');
-            console.log('表單數據:', data);
+            uploadArea.classList.add('dragover');
+        });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            addFiles(e.dataTransfer.files);
         });
 
-        // 頁面載入時的動畫效果
-        window.addEventListener('load', function() {
-            document.querySelector('.form-container').style.opacity = '0';
-            document.querySelector('.form-container').style.transform = 'translateY(30px)';
-            
+        photoInput.addEventListener('change', () => {
+            addFiles(photoInput.files);
+            photoInput.value = ''; // 允許重複選同一張
+        });
+
+        function addFiles(fileList) {
+            for (const file of fileList) {
+                if (!file.type.startsWith('image/')) {
+                    showMessage('error', `「${file.name}」不是圖片檔，已略過。`);
+                    continue;
+                }
+                if (file.size > MAX_FILE_SIZE) {
+                    showMessage('error', `「${file.name}」超過 5MB，請壓縮後再上傳。`);
+                    continue;
+                }
+                if (selectedFiles.length >= MAX_FILES) {
+                    showMessage('error', `最多只能上傳 ${MAX_FILES} 張圖片。`);
+                    break;
+                }
+                selectedFiles.push(file);
+                renderPreview(file);
+            }
+        }
+
+        function renderPreview(file) {
+            const item = document.createElement('div');
+            item.className = 'preview-item';
+
+            const img = document.createElement('img');
+            img.alt = file.name;
+            const reader = new FileReader();
+            reader.onload = (e) => { img.src = e.target.result; };
+            reader.readAsDataURL(file);
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-btn';
+            removeBtn.textContent = '✕';
+            removeBtn.title = '移除這張圖片';
+            removeBtn.addEventListener('click', () => {
+                selectedFiles = selectedFiles.filter(f => f !== file);
+                item.remove();
+            });
+
+            item.appendChild(img);
+            item.appendChild(removeBtn);
+            previewsEl.appendChild(item);
+        }
+
+        // 將檔案讀成 base64（去掉 data: 前綴）
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // 上傳單張圖片到 Apps Script，回傳雲端硬碟連結
+        async function uploadImage(file) {
+            const base64 = await fileToBase64(file);
+            const res = await fetch(UPLOAD_SCRIPT_URL, {
+                method: 'POST',
+                // 用 text/plain 避免 CORS 預檢，Apps Script 端用 JSON.parse 解析
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    fileName: file.name,
+                    mimeType: file.type,
+                    base64: base64
+                })
+            });
+            const data = await res.json();
+            if (!data.ok) throw new Error(data.error || '上傳失敗');
+            return data.url;
+        }
+
+        // ===== 表單提交 =====
+        const form = document.getElementById('portraitForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const messageEl = document.getElementById('formMessage');
+
+        function showMessage(type, text) {
+            messageEl.className = 'form-message ' + type;
+            messageEl.textContent = text;
+            messageEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // 原生欄位驗證（必填、Email 格式）
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            messageEl.className = 'form-message';
+
+            try {
+                // 1. 先上傳圖片（若有）
+                let imageUrls = [];
+                if (selectedFiles.length > 0) {
+                    if (!UPLOAD_SCRIPT_URL) {
+                        showMessage('error', '圖片上傳功能尚未啟用，請先送出表單，再將照片以 Email 寄給我們，謝謝！');
+                    } else {
+                        submitBtn.textContent = '圖片上傳中...';
+                        imageUrls = await Promise.all(selectedFiles.map(uploadImage));
+                    }
+                }
+
+                // 2. 組合表單資料，圖片連結附加在備註欄
+                submitBtn.textContent = '送出中...';
+                const formData = new FormData(form);
+                if (imageUrls.length > 0) {
+                    const notes = formData.get(NOTES_ENTRY_ID) || '';
+                    formData.set(NOTES_ENTRY_ID, notes + '\n\n【參考圖片】\n' + imageUrls.join('\n'));
+                }
+
+                // 3. 送出到 Google 表單（no-cors：瀏覽器讀不到回應，但資料會成功寫入）
+                await fetch(GOOGLE_FORM_ACTION, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                });
+
+                showMessage('success', '✅ 訂單已送出！我們會盡快與您聯絡，謝謝您的支持〜');
+                form.reset();
+                selectedFiles = [];
+                previewsEl.innerHTML = '';
+            } catch (err) {
+                console.error(err);
+                showMessage('error', '送出時發生錯誤，請稍後再試，或直接透過 Email / IG 與我們聯絡。');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '提交訂單';
+            }
+        });
+
+        // 頁面載入時的淡入動畫
+        window.addEventListener('load', function () {
+            const container = document.querySelector('.form-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
             setTimeout(() => {
-                document.querySelector('.form-container').style.transition = 'all 0.6s ease';
-                document.querySelector('.form-container').style.opacity = '1';
-                document.querySelector('.form-container').style.transform = 'translateY(0)';
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
             }, 100);
         });
     </script>
