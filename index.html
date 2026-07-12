@@ -74,15 +74,22 @@
             flex-wrap: wrap;
         }
 
-        .social-links img {
+        .social-links img,
+        .social-links svg {
             width: 48px;
             height: 48px;
             object-fit: contain;
             border-radius: 12px;
             transition: transform 0.2s ease;
+            display: block;
         }
 
-        .social-links a:hover img {
+        .social-links svg {
+            padding: 6px; /* X logo 視覺上比其他 icon 滿，內縮一點對齊 */
+        }
+
+        .social-links a:hover img,
+        .social-links a:hover svg {
             transform: scale(1.15);
         }
 
@@ -364,11 +371,11 @@
             <div class="contact-info">
                 <h3>📱 聯絡我們</h3>
                 <div class="social-links">
-                    <!-- TODO: 填入 Facebook 粉絲專頁網址 -->
-                    <a href="#" title="DrawHeart 粉絲專頁"><img src="fb.png" alt="Facebook"></a>
                     <a href="https://www.instagram.com/drawheart_510/#" title="DrawHeart 繪心室"><img src="ig.png" alt="Instagram"></a>
+                    <a href="https://x.com/suguooozi" title="DrawHeart 的 X" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path fill="#000" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=drawheart510@gmail.com&su=我要訂購似顏繪&body=您好，我想訂購似顏繪服務，以下是我的需求..." target="_blank" rel="noopener" title="寄信給我"><img src="gmail.png" alt="Gmail"></a>
-                    <a href="https://www.youtube.com/@_suguooozi" title="菓子魔法小舖"><img src="yt.png" alt="YouTube"></a>
                 </div>
             </div>
 
