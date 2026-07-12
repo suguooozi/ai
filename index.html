@@ -281,6 +281,23 @@
             cursor: not-allowed;
         }
 
+        /* LINE 內建瀏覽器提示 */
+        .inapp-warning {
+            display: none;
+            background: #fff8e1;
+            color: #8a6d1a;
+            border-bottom: 2px solid #f0d878;
+            padding: 14px 18px;
+            text-align: center;
+            font-size: 0.98em;
+            line-height: 1.6;
+        }
+
+        .inapp-warning a {
+            color: #6b4fa0;
+            font-weight: 700;
+        }
+
         /* 提交結果訊息 */
         .form-message {
             display: none;
@@ -334,6 +351,11 @@
 </head>
 <body>
     <div class="form-container">
+        <div class="inapp-warning" id="inappWarning">
+            ⚠️ 您正在使用 LINE 內建瀏覽器，圖片上傳可能無法正常運作。<br>
+            請<a href="#" id="openExternalLink">點此以外部瀏覽器開啟</a>，
+            或點右下角「⋯」選單 →「以預設瀏覽器開啟」。
+        </div>
         <div class="form-header">
             <h1>🎨 DrawHeart繪心室 | 似顏繪訂購表單</h1>
             <p>歡迎來到 DrawHeart 繪心室的似顏繪訂購表單</p>
@@ -681,12 +703,26 @@
                 previewsEl.innerHTML = '';
             } catch (err) {
                 console.error(err);
-                showMessage('error', '送出時發生錯誤，請稍後再試，或直接透過 Email / IG 與我們聯絡。');
+                showMessage('error', '送出時發生錯誤（' + (err.message || err) + '）。' +
+                    '若您使用 LINE 或 FB 內建瀏覽器，請改用 Chrome / Safari 開啟本頁再試，' +
+                    '或直接透過 Email / IG 與我們聯絡。');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = '提交訂單';
             }
         });
+
+        // ===== LINE 內建瀏覽器偵測 =====
+        // LINE 的 WebView 對檔案選擇和跨網域請求有限制，引導使用者改用外部瀏覽器
+        if (/ Line\//i.test(navigator.userAgent)) {
+            const warning = document.getElementById('inappWarning');
+            warning.style.display = 'block';
+            const link = document.getElementById('openExternalLink');
+            // LINE 支援 openExternalBrowser=1 參數，點擊後會改用系統預設瀏覽器開啟
+            const url = new URL(location.href);
+            url.searchParams.set('openExternalBrowser', '1');
+            link.href = url.toString();
+        }
 
         // 頁面載入時的淡入動畫
         window.addEventListener('load', function () {
